@@ -10,7 +10,7 @@
         
         private function setParams($statement, $parameters = array()){
             foreach ($parameters as $key => $value) {
-                $stmt->setParam($key, $value);
+                $this->setParam($statement, $key, $value);
             }
         }
         
