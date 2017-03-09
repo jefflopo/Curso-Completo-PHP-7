@@ -2,7 +2,7 @@
     $conn = new PDO("mysql:host=localhost; dbname=db_php7", "root", "");
     
     $stmt = $conn->prepare( "UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWORD WHERE idusuario = :ID" );
-    // atualizando dados no Banco de Dados
+    // inserindo dados no Banco de Dados
     $login = "Joaozinho";
     $password = "qwerty";
     $id = 3;
