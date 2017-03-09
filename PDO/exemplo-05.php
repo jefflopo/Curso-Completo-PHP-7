@@ -4,14 +4,12 @@
     $stmt = $conn->prepare( "DELETE FROM tb_usuarios WHERE idusuario = :ID" );
     // deletando dados no Banco de Dados
     
-    $id = 3;
+    $id = 12;
     
-    $stmt->bindParam(":LOGIN", $login);
-    $stmt->bindParam(":PASSWORD", $password);
     $stmt->bindParam(":ID", $id);
     
     $stmt->execute();
     
-    echo "Atualizado com Sucesso!!!";
+    echo "Deleção com Sucesso!!!";
 ?>
 
