@@ -1,4 +1,16 @@
 <?php
-
+    $conn = new PDO("mysql:host=localhost; dbname=db_php7", "root", "");
+    
+    $stmt = $conn->prepare( "INSERT INTO tb_usuarios (deslogin, dessenha) VALUES (:LOGIN,:PASSWORD)" );
+    // inserindo dados no Banco de Dados
+    $login = "jose";
+    $password = "1234567890";
+    
+    $stmt->bindParam(":LOGIN", $login);
+    $stmt->bindParam(":PASSWORD", $password);
+    
+    $stmt->execute();
+    
+    echo "Inserido OK!!!";
 ?>
 
