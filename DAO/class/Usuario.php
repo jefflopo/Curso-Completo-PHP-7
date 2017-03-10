@@ -103,6 +103,22 @@
             
         }
         
+        public function update($login, $password) {
+            
+            $this->setDeslogin($login);
+            $this->setDessenha($password);
+            
+            $sql = new Sql();
+            
+            $sql->query( "UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :PASSWORD WHERE idusuario = :ID", array(
+                ':LOGIN'=> $this->getDeslogin(),
+                ':PASSWORD'=> $this->getDessenha(),
+                ':ID'=> $this->getIdusuario()
+            ) );
+            
+        }
+
+
         public function __construct($login = "", $password = "") {
             $this->setDeslogin($login);
             $this->setDessenha($password);
@@ -115,7 +131,7 @@
                 "idusuario"=>$this->getIdusuario(),
                 "deslogin"=>$this->getDeslogin(),
                 "dessenha"=>$this->getDessenha(),
-                "dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
+                "dtcadastro"=>$this->getDtcadastro()->format("d-m-Y H:i:s")
             ) );
         }
          
