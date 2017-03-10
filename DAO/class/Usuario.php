@@ -48,7 +48,7 @@
                 $this->setIdusuario( $row['idusuario'] );
                 $this->setDeslogin( $row['deslogin'] );
                 $this->setDessenha( $row['dessenha'] );
-                $this->setDtcadastro( new DateTime($row['dtcadastro']) )->format("d/m/Y H:i:s");
+                $this->setDtcadastro( new DateTime($row['dtcadastro']) )->format('d/m/Y H:i:s');
                 
             }
         }
@@ -82,7 +82,7 @@
                 $this->setIdusuario( $row['idusuario'] );
                 $this->setDeslogin( $row['deslogin'] );
                 $this->setDessenha( $row['dessenha'] );
-                $this->setDtcadastro( new DateTime($row['dtcadastro']) )->format("d/m/Y H:i:s");
+                $this->setDtcadastro( new DateTime($row['dtcadastro']) );
                 
             }else{
                 throw new Exception("Login e/ou senha inválidos!");
