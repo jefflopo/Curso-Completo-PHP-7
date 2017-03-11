@@ -85,7 +85,7 @@
             $this->setIdusuario( $data['idusuario'] );
             $this->setDeslogin( $data['deslogin'] );
             $this->setDessenha( $data['dessenha'] );
-            $this->setDtcadastro( new DateTime($data['dtcadastro']) );
+            $this->setDtcadastro( new DateTime($data['dtcadastro'])->format("d/m/Y H:i:s") );
             
         }
         
@@ -146,7 +146,7 @@
                 "idusuario"=>$this->getIdusuario(),
                 "deslogin"=>$this->getDeslogin(),
                 "dessenha"=>$this->getDessenha(),
-                "dtcadastro"=>$this->getDtcadastro()->format("d-m-Y H:i:s")
+                "dtcadastro"=>$this->getDtcadastro()
             ) );
         }
          
