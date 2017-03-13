@@ -85,9 +85,8 @@
             $this->setIdusuario( $data['idusuario'] );
             $this->setDeslogin( $data['deslogin'] );
             $this->setDessenha( $data['dessenha'] );
-            $this->setDtcadastro( new DateTime($data['dtcadastro'])->format("d/m/Y H:i:s") );
-            
-        }
+            $this->setDtcadastro( new DateTime($data['dtcadastro']) )->format("d/m/Y H:i:s");
+    }
         
         public function insert() {
             
