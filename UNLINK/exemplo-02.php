@@ -8,5 +8,7 @@
             unlink("images/" .$item);
         }
     }
+    
+    echo "Imagens removidas com sucesso!!";
         
 
