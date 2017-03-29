@@ -1,0 +1,6 @@
+{
+    "name": "B2681739",
+    "require":{
+        "phpmailer/phpmailer": "~5.2"
+    }
+}
