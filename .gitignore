@@ -17,6 +17,7 @@ bin-release/
 #Pasta de arquivos
 Email/index.php
 template/index.php
+Template/index.php
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
