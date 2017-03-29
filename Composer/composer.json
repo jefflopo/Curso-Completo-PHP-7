@@ -1,0 +1,13 @@
+{
+    "name": "jefflopo/composer",
+    "description": "Aula de PHP 7",
+    "type": "project",
+    "authors": [
+        {
+            "name": "jefflopo",
+            "email": "jeffersonlopo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
