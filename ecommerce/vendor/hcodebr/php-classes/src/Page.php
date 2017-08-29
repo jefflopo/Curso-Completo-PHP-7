@@ -46,6 +46,8 @@ class Page {
         
         $this->setData($data);
         
+        $this->tpl->draw($name, $returnHTML);
+        
     }
 
 
