@@ -9,9 +9,9 @@ class Page {
     public function __construct() {
         
         $config = array(
-                    "tpl_dir"       => "templates/simple/",
-                    "cache_dir"     => "cache/",
-                    "debug"         => true // set to false to improve the speed
+                    "tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/view/",
+                    "cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
+                    "debug"         => false
                 );
 
 	Tpl::configure( $config );
