@@ -27,14 +27,28 @@ class Page {
         
         $this->tpl = new Tpl;
         
-        foreach ($this->options["data"] as $key =>$value){
-            $this->tpl->assign($key, $value);
-        }
+        $this->setData($this->options["data"]);
         
         $this->tpl->draw("header");
         
     }
     
+    private function setData($data = array()){
+        
+        foreach ($data as $key =>$value){
+            $this->tpl->assign($key, $value);
+        }
+        
+    }
+
+
+    public function setTpl($name, $data = array(), $returnHTML = false) {
+        
+        $this->setData($data);
+        
+    }
+
+
     public function __destruct() {
         
         $this->tpl->draw("footer");
