@@ -30,9 +30,12 @@ $app->get('/admin', function() {
 
 });
 
-$app->get('/admin/login', function (){
+$app->get('/admin/login', function(){
     
-    $page = new PageAdmin();
+    $page = new PageAdmin( array(
+        "header"=>false,
+        "footer"=>false
+    ));
     $page->setTpl("login");
     
 });
