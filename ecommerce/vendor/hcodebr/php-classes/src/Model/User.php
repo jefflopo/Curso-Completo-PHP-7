@@ -1,8 +1,33 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Hcode\Model;
+
+use \Hcode\DB\Sql;
+use \Hcode\Model;
+
+class User extends Model {
+    
+    public static function login($login, $password){
+        
+        $sql = new \Sql();
+        
+        $results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array(
+            ":LOGIN"=>$login
+        ));
+        
+        if(count($results) === 0){
+            throw new \Exception("Usuário inexistente ou senha inválida!!");
+        }
+        
+        $data = $results[0];
+        
+        if(password_verify($password, $data["despassword"]) === true){
+            $user = new User();
+        } else{
+            throw new \Exception("Usuário inexistente ou senha inválida!!");
+        }
+        
+    }
+    
+}
 
