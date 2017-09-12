@@ -24,7 +24,10 @@ class User extends Model {
         if(password_verify($password, $data["despassword"]) === true){
             $user = new User();
             
-            $user->setiduser( $data["iduser"] );
+            $user->setData( $data );
+            
+            var_dump($user);
+            exit;
         } else{
             throw new \Exception("Usuário inexistente ou senha inválida!!");
         }
