@@ -92,7 +92,7 @@ $app->get("/admin/users/:iduser/delete", function($iduser){
     
     $user->delete();
     
-    header("Location: ../users");
+    header("Location: /CursoCompletoPHP7/ecommerce/admin/users");
     exit;
     
 });
