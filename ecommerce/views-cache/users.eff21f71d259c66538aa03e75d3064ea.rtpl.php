@@ -6,8 +6,8 @@
     Lista de Usuários
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active"><a href="/admin/users">Usuários</a></li>
+    <li><a href="/CursoCompletoPHP7/ecommerce/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active"><a href="/CursoCompletoPHP7/ecommerce/admin/users">Usuários</a></li>
   </ol>
 </section>
 
@@ -19,7 +19,7 @@
   		<div class="box box-primary">
             
             <div class="box-header">
-              <a href="/admin/users/create" class="btn btn-success">Cadastrar Usuário</a>
+              <a href="/CursoCompletoPHP7/ecommerce/admin/users/create" class="btn btn-success">Cadastrar Usuário</a>
             </div>
 
             <div class="box-body no-padding">
