@@ -23,7 +23,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/create" method="post">
+        <form role="form" action="../users/create" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="desperson">Nome</label>
