@@ -149,6 +149,16 @@ $app->post("/admin/users/:iduser", function($iduser){
     
 });
 
+$app->get('/admin/forgot', function(){
+
+    $page = new PageAdmin( [
+        "header"=>false,
+        "footer"=>false
+    ]);
+    $page->setTpl("forgot");
+    
+});
+
 
 
 $app->run();
