@@ -4,6 +4,7 @@ namespace Hcode\Model;
 
 use \Hcode\DB\Sql;
 use \Hcode\Model;
+use \Hcode\Mailer;
 
 class User extends Model {
     
@@ -152,7 +153,19 @@ class User extends Model {
             }else{
                 $dataRecovery = $results2[0];
                 
-                $code = base64_encode( mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB) );
+                //$code = base64_encode( mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB) );
+                
+                $cipher = "aes-128-gcm";
+                
+                if (in_array($cipher, openssl_get_cipher_methods()))
+                {
+                    $ivlen = openssl_cipher_iv_length($cipher);
+                    $iv = openssl_random_pseudo_bytes($ivlen);
+                    $code = openssl_encrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
+                    //store $cipher, $iv, and $tag for decryption later
+                    /*$original_plaintext = openssl_decrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
+                    echo $original_plaintext."\n";*/
+                }
                 
                 $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/admin/forgot/reset?code=$code";
                 
