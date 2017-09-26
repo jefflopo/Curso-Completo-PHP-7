@@ -9,3 +9,5 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/netbeans
+
+/vendor/hcodebr/php-classes/src/Mailer.php
