@@ -5,6 +5,7 @@ use \Slim\Slim;
 //use Hcode\DB\Sql;
 use \Hcode\Page;
 use \Hcode\PageAdmin;
+use \Hcode\PageCategories;
 use \Hcode\Model\User;
 use \Hcode\Model\Category;
 
@@ -318,6 +319,19 @@ $app->post("/admin/categories/:idcategory", function($idcategory){
     
 });
 
+$app->get("/categories/:idcategory", function($idcategory){
+    
+    $category = new Category();
+    
+    $category->get((int)$idcategory);
+    
+    $page = new PageCategories();
+    
+    $page->setTpl("category", [
+        'category'=>$category->getValues()
+    ]);
+    
+});
 
 
 
