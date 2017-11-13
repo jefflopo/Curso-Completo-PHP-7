@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -26,7 +26,7 @@
         <form role="form" action="../products/create" method="post">
           <div class="box-body">
                 <div class="form-group">
-                  <label for="desproduct">Nome do produto</label>
+                  <label for="desproduct">Nome da produto</label>
                   <input type="text" class="form-control" id="desproduct" name="desproduct" placeholder="Digite o nome do produto">
                 </div>
                 <div class="form-group">

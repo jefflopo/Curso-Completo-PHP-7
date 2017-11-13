@@ -41,6 +41,9 @@ class User extends Model {
     
     public static function verifyLogin($inadmin = true){
         
+//        var_dump($_SESSION[User::SESSION]);
+//        exit; 
+        
         if( 
                 !isset($_SESSION[User::SESSION]) || 
                 !$_SESSION[User::SESSION] ||
@@ -49,6 +52,9 @@ class User extends Model {
         ){
             header("Location: ../ecommerce/admin/login");
             exit;
+        }else{
+            echo "Erro ao logar no sistema!";
+            
         }
         
     }
@@ -153,19 +159,19 @@ class User extends Model {
             }else{
                 $dataRecovery = $results2[0];
                 
-                //$code = base64_encode( mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB) );
+                $code = base64_encode( mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB) );
                 
-                $cipher = "aes-128-gcm";
-                
-                if (in_array($cipher, openssl_get_cipher_methods()))
-                {
-                    $ivlen = openssl_cipher_iv_length($cipher);
-                    $iv = openssl_random_pseudo_bytes($ivlen);
-                    $code = openssl_encrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
-                    //store $cipher, $iv, and $tag for decryption later
-                    /*$original_plaintext = openssl_decrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
-                    echo $original_plaintext."\n";*/
-                }
+//                $cipher = "aes-128-gcm";
+//                
+//                if (in_array($cipher, openssl_get_cipher_methods()))
+//                {
+//                    $ivlen = openssl_cipher_iv_length($cipher);
+//                    $iv = openssl_random_pseudo_bytes($ivlen);
+//                    $code = openssl_encrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
+//                    //store $cipher, $iv, and $tag for decryption later
+//                    /*$original_plaintext = openssl_decrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
+//                    echo $original_plaintext."\n";*/
+//                }
                 
                 $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/admin/forgot/reset?code=$code";
                 
