@@ -52,8 +52,9 @@ class User extends Model {
         ){
             header("Location: ../ecommerce/admin/login");
             exit;
-        }else{
             echo "Erro ao logar no sistema!";
+        }else{
+//            echo "Sucesso ao logar no sistema!";
             
         }
         
