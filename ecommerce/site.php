@@ -1,6 +1,7 @@
 <?php
 
 use \Hcode\Page;
+use \Hcode\Model\Product;
 
 $app->get('/', function() {
     
@@ -9,8 +10,13 @@ $app->get('/', function() {
 //        
 //       echo json_encode($results);
     
+    $products = Product::listAll();
+    
     $page = new Page();
-    $page->setTpl("index");
+    
+    $page->setTpl("index", [
+        'products'=>Product::checklist($products)
+    ]);
 
 });
 
