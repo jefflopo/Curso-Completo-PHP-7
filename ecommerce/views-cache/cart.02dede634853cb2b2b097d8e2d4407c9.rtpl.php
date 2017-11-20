@@ -44,7 +44,7 @@
                                         </td>
 
                                         <td class="product-thumbnail">
-                                            <a href="#"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="/res/site/img/product-thumb-2.jpg"></a>
+                                            <a href="#"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="res/site/img/product-thumb-2.jpg"></a>
                                         </td>
 
                                         <td class="product-name">
