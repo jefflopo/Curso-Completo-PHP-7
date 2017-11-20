@@ -58,12 +58,19 @@ $app->get("/products/:desurl", function($desurl){
     
     $product->getFromURL($desurl);
     
-    $page = new Page();
+    $page = new PageCategories();
     
     $page->setTpl("product-detail",[
         'product'=>$product->getValues(),
         'categories'=>$product->getCategories()
     ]);
+    
+});
+$app->get('/cart', function(){
+    
+    $page = new Page();
+    
+    $page->setTpl("cart");
     
 });
 
