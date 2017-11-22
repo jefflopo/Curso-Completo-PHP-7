@@ -95,8 +95,6 @@ $app->get("/cart/:idproduct/add", function($idproduct){
         
     }
     
-    $cart->addProduct($product);
-    
     header("Location: /CursoCompletoPHP7/ecommerce/cart");
     exit;
     
