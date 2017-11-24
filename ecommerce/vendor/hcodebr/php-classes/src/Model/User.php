@@ -67,7 +67,7 @@ class User extends Model {
         
         $data = $results[0];
         
-        if(password_verify($password, $data["despassword"]) === true){
+        if(password_verify($password, $data['despassword']) === true){
             $user = new User();
             
             $data['desperson'] = utf8_encode($data['desperson']);
@@ -175,7 +175,7 @@ class User extends Model {
         
     }
     
-    public static function getForgot($email){
+    public static function getForgot($email, $inadmin = true){
         
         $sql = new Sql();
         
@@ -218,7 +218,17 @@ class User extends Model {
 //                    echo $original_plaintext."\n";*/
 //                }
                 
-                $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/admin/forgot/reset?code=$code";
+                if($inadmin === true){
+                    
+                    $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/admin/forgot/reset?code=$code";
+                    
+                } else{
+                    
+                    $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/forgot/reset?code=$code";
+                    
+                }
+                
+                
                 
                 $mailer = new Mailer($data["desemail"], $data["desperson"], "Redefinir Senha do Curso Completo PHP7", "forgot", array(
                     "name"=>$data["desperson"],
