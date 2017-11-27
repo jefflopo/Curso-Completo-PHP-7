@@ -175,6 +175,7 @@ $app->post("/login", function(){
     } catch (Exception $exc) {
         
         User::setError($exc->getMessage());
+        header("Location: /CursoCompletoPHP7/ecommerce/login");
         exit;
     }
     header("Location: /CursoCompletoPHP7/ecommerce/checkout");
@@ -247,9 +248,9 @@ $app->get('/forgot', function(){
 
 $app->post("/forgot", function(){
     
-    $user = User::getForgot($_POST["email"]);
+    $user = User::getForgot($_POST["email"], false);
     
-    header("Location: ../admin/forgot/sent");
+    header("Location: ../forgot/sent");
     exit;
     
 });

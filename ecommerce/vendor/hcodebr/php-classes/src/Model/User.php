@@ -34,7 +34,7 @@ class User extends Model {
                 || 
                 !$_SESSION[User::SESSION] 
                 ||
-                !(int)$_SESSION[User::SESSION]["iduser"] > 0
+                !(int)$_SESSION[User::SESSION]['iduser'] > 0
             ){
             //USUARIO NÃO ESTÁ LOGADO!
             return false;
@@ -84,9 +84,8 @@ class User extends Model {
     }
     
     public static function verifyLogin($inadmin = true){
-        
-//        var_dump($_SESSION[User::SESSION]);
-//        exit; 
+//        var_dump(User::checkLogin($inadmin));//$_SESSION[User::SESSION]
+//        exit;
         
         if(User::checkLogin($inadmin)){
             
@@ -96,7 +95,7 @@ class User extends Model {
                 header("Location: ../ecommerce/login");
             }
             
-        }
+        }        
         
     }
     

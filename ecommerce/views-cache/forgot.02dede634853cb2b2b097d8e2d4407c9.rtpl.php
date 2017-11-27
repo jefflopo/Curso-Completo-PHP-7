@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">                
             <div class="col-md-12">
-                <form id="login-form-wrap" class="login" method="post" action="/forgot">
+                <form id="login-form-wrap" class="login" method="post" action="../ecommerce/forgot">
                     <h2>Recuperar senha</h2>
                     <p class="form-row form-row-first">
                         <label for="email">E-mail <span class="required">*</span>
