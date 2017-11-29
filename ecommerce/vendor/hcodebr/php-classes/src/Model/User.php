@@ -88,7 +88,7 @@ class User extends Model {
 //        var_dump(User::checkLogin($inadmin));//$_SESSION[User::SESSION]
 //        exit;
         
-        if(User::checkLogin($inadmin)){
+        if(!User::checkLogin($inadmin)){
             
             if($inadmin){
                 header("Location: ../ecommerce/admin/login");
