@@ -32,7 +32,7 @@
         </div>
         <?php } ?>
 
-        <form role="form" action="/admin/users/<?php echo htmlspecialchars( $user["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/password" method="post">
+        <form role="form" action="../admin/users/<?php echo htmlspecialchars( $user["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/password" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="despassword">Nova Senha</label>
