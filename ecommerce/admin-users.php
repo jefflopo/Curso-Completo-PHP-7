@@ -11,10 +11,13 @@ $app->get("/admin/users/:iduser/password", function($iduser){
     
     $user->get((int)$iduser);
     
+//    var_dump($user->getValues());
+//    exit;
+    
     $page = new PageAdmin();
     
     $page->setTpl("users-password",[
-        "user"=>$user->getValues(),
+        "user"=>$user->getValues()[0],
         "msgError"=>User::getError(),
         "msgSuccess"=>User::getSuccess()
     ]);
@@ -134,7 +137,7 @@ $app->get("/admin/users/:iduser", function($iduser){
     $page = new PageAdmin();
     
     $page->setTpl("users-update", array(
-        "user"=>$user->getValues()
+        "user"=>$user->getValues()[0]
     ));
     
 });

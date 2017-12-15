@@ -183,7 +183,7 @@ class User extends Model {
             SELECT * 
             FROM tb_persons a
             INNER JOIN tb_users b USING(idperson)
-            WHERE desemail = :email;", 
+            WHERE a.desemail = :email;", 
             array(
                 ":email"=>$email
             ));
@@ -204,31 +204,19 @@ class User extends Model {
             }else{
                 $dataRecovery = $results2[0];
                 
-                $code = base64_encode( mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB) );
-                
-//                $cipher = "aes-128-gcm";
-//                
-//                if (in_array($cipher, openssl_get_cipher_methods()))
-//                {
-//                    $ivlen = openssl_cipher_iv_length($cipher);
-//                    $iv = openssl_random_pseudo_bytes($ivlen);
-//                    $code = openssl_encrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
-//                    //store $cipher, $iv, and $tag for decryption later
-//                    /*$original_plaintext = openssl_decrypt(User::SECRET, $cipher, $dataRecovery["idrecovery"], $options=0, $iv, $tag);
-//                    echo $original_plaintext."\n";*/
-//                }
+                $iv = random_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+                $code = openssl_encrypt($dataRecovery['idrecovery'], 'aes-256-cbc', User::SECRET, 0, $iv);
+                $result = base64_encode($iv.$code);
                 
                 if($inadmin === true){
                     
-                    $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/admin/forgot/reset?code=$code";
+                    $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/admin/forgot/reset?code=$result";
                     
                 } else{
                     
-                    $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/forgot/reset?code=$code";
+                    $link = "http://localhost:8080/CursoCompletoPHP7/ecommerce/forgot/reset?code=$result";
                     
                 }
-                
-                
                 
                 $mailer = new Mailer($data["desemail"], $data["desperson"], "Redefinir Senha do Curso Completo PHP7", "forgot", array(
                     "name"=>$data["desperson"],
@@ -237,17 +225,19 @@ class User extends Model {
                 
                 $mailer->send();
                 
-                return $data;
+                return $link;
             }
         }
         
         
     }
     
-    public static function validForgotDecrypt($code){
+    public static function validForgotDecrypt($result){
         
-        $idrecovery = mcrypt_decrypt(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, User::SECRET, base64_decode($code), MCRYPT_MODE_ECB));
-        
+        $result = base64_decode($result);
+        $code = mb_substr($result, openssl_cipher_iv_length('aes-256-cbc'), null, '8bit');
+        $iv = mb_substr($result, 0, openssl_cipher_iv_length('aes-256-cbc'), '8bit');;
+        $idrecovery = openssl_decrypt($code, 'aes-256-cbc', User::SECRET, 0, $iv);
         $sql = new Sql();
 
         $results = $sql->select("
