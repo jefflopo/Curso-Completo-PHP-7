@@ -1,0 +1,319 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Edição de Clientes
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/bgt/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><a href="/bgt/admin/clients">Clientes</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Editar Cliente</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" action="/bgt/admin/clients/{$clients.idclient}" method="post">
+                        <div class="box-body">
+                            <div class="form-group col-md-6">
+                                <label for="des_situation">Situação</label>
+                                <select name="des_situation">
+                                    <option value="ATIVO" {if="$clients.des_situation == 'ATIVO'"}selected{/if}>Ativo</option>
+                                    <option value="SUSPENSO" {if="$clients.des_situation == 'SUSPENSO'"}selected{/if}>Suspenso</option>    
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_plataform_name">Nome da Plataforma de Rastreamento</label>
+                                <input type="text" class="form-control" id="des_plataform_name" name="des_plataform_name" placeholder="Ex: Nome da Plataforma de Rastreamento" 
+                                       autocomplete="off" required value="{$clients.des_plataform_name}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="desname">Nome / Razão Social</label>
+                                <input type="text" class="form-control" id="desname" name="desname" 
+                                       placeholder="Digite o nome do Cliente" value="{$clients.desname}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_fantasy_name">Nome Fantasia</label>
+                                <input type="text" class="form-control" id="des_fantasy_name" name="des_fantasy_name" 
+                                       placeholder="Digite o nome fantasia" value="{$clients.des_fantasy_name}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="nrcpf_cnpj">CPF / CNPJ</label>
+                                <input type="text" class="form-control" name="nrcpf_cnpj" placeholder="Ex: 000.000.000-00 ou 000.000.000/0000-00" 
+                                       required value="{$clients.nrcpf_cnpj}" style="text-transform:uppercase"><!-- data-mask="000.000.000-00" maxlength="11" autocomplete="off" -->
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_rg_ie">RG/IE</label>
+                                <input type="text" class="form-control" id="des_rg_ie" name="des_rg_ie" placeholder="Digite o RG" autocomplete="off" 
+                                       value="{$clients.des_rg_ie}" style="text-transform:uppercase">
+                            </div>                            
+                            <div class="form-group col-md-6">
+                                <label for="dessex">Sexo</label>
+                                <input type="text" class="form-control" id="dessex" name="dessex" placeholder="Sexo do Cliente" 
+                                       autocomplete="off" value="{$clients.dessex}" style="text-transform:uppercase">
+                            </div>                            
+                            <div class="form-group col-md-6">
+                                <label for="des_marital_status">Estado Civil</label>
+                                <input type="text" class="form-control" id="des_marital_status" name="des_marital_status" placeholder="Estado Civil do Cliente" 
+                                       autocomplete="off" value="{$clients.des_marital_status}" style="text-transform:uppercase">
+                            </div>                            
+                            <div class="form-group col-md-6">
+                                <label for="nr_cnh">Nº da CNH</label>
+                                <input type="text" class="form-control" id="nr_cnh" name="nr_cnh" placeholder="Nº da CNH do Cliente" autocomplete="off" value="{$clients.nr_cnh}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="dt_of_birth">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="dt_of_birth" name="dt_of_birth" value="{$clients.dt_of_birth}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_email">E-mail</label>
+                                <input type="email" class="form-control" id="des_email" name="des_email" placeholder="Digite o e-mail" 
+                                       value="{$clients.des_email}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="nr_telephone">Telefone Fixo</label>
+                                <input type="text" class="form-control" id="nr_telephone" name="nr_telephone" placeholder="Ex: (00)0000-0000" data-mask="(99)9999-9999" 
+                                       maxlength="10" autocomplete="off" required value="{$clients.nr_telephone}" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="nr_cell_phone">Celular</label>
+                                <input type="text" class="form-control" id="nr_cell_phone" name="nr_cell_phone" placeholder="Ex: (00)00000-0000" data-mask="(99)99999-9999" 
+                                       maxlength="11" autocomplete="off" required value="{$clients.nr_cell_phone}" >
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">ENDEREÇO</h3>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_cep">CEP</label>
+                                <input type="text" class="form-control" id="des_cep" name="des_cep" placeholder="Ex: 00.000-000" data-mask="00.000-000" maxlength="8" autocomplete="off" required value="{$clients.des_cep}">
+                                <br/>
+                                <input type="submit" value="Consultar CEP" id="place_order" class="form-control btn btn-info" formaction="/bgt/admin/clients/create" formmethod="get">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_address">Endereço</label>
+                                <input type="text" class="form-control" id="des_address" name="des_address" placeholder="Digite o endereço" 
+                                       value="{$clients.des_address}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_number">Nº</label>
+                                <input type="number" class="form-control" id="des_number" name="des_number" placeholder="Digite o Nº" value="{$clients.des_number}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_neighborhood">Bairro</label>
+                                <input type="text" class="form-control" id="des_neighborhood" name="des_neighborhood" placeholder="Digite o Bairro" 
+                                       value="{$clients.des_neighborhood}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_city">Cidade</label>
+                                <input type="text" class="form-control" id="des_city" name="des_city" placeholder="Digite a Cidade" 
+                                       value="{$clients.des_city}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_complement">Complemento</label>
+                                <input type="text" class="form-control" id="des_complement" name="des_complement" placeholder="Digite o Complemento" 
+                                       value="{$clients.des_complement}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_state">Estado</label>
+                                <input type="text" class="form-control" id="des_state" name="des_state" placeholder="Digite o Estado" 
+                                       value="{$clients.des_state}" style="text-transform:uppercase">
+                            </div>
+
+                        </div>
+
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">PESSOAS AUTORIZADAS</h3>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_name_person1">Pessoa 1</label>
+                                <input type="text" class="form-control" id="des_name_person1" name="des_name_person1" 
+                                       placeholder="Insira nome da pessoa autorizada" value="{$clients.des_name_person1}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_kinship_person1">Parentesco</label>
+                                <input type="text" class="form-control" id="des_kinship_person1" name="des_kinship_person1" 
+                                       placeholder="Insira o Parentesco com a pessoa autorizada" value="{$clients.des_kinship_person1}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_phone_kinship_person1">Telefone</label>
+                                <input type="text" class="form-control" id="des_phone_kinship_person1" name="des_phone_kinship_person1" placeholder="Insira o telefone da pessoa autorizada" 
+                                       data-mask="(99)9999-9999" maxlength="10" autocomplete="off"
+                                       {if="$clients.des_phone_kinship_person1 == 0"}value=""{else}value="{$clients.des_phone_kinship_person1}"{/if}>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_cellphone_kinship_person1">Celular</label>
+                                <input type="text" class="form-control" id="des_cellphone_kinship_person1" name="des_cellphone_kinship_person1" placeholder="Insira o nº do celular da pessoa autorizada" 
+                                       data-mask="(99)99999-9999" maxlength="11" autocomplete="off" 
+                                       {if="$clients.des_cellphone_kinship_person1 == 0"}value=""{else}value="{$clients.des_cellphone_kinship_person1}"{/if}>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <br/>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="des_name_person2">Pessoa 2</label>
+                                <input type="text" class="form-control" id="des_name_person2" name="des_name_person2" 
+                                       placeholder="Insira nome da pessoa autorizada" value="{$clients.des_name_person2}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_kinship_person2">Parentesco</label>
+                                <input type="text" class="form-control" id="des_kinship_person2" name="des_kinship_person2" 
+                                       placeholder="Insira o Parentesco da pessoa autorizada" value="{$clients.des_kinship_person2}" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_phone_kinship_person2">Telefone</label>
+                                <input type="text" class="form-control" id="des_phone_kinship_person2" name="des_phone_kinship_person2" 
+                                       placeholder="Insira o telefone da pessoa autorizada" data-mask="(99)9999-9999" maxlength="10" autocomplete="off" 
+                                       {if="$clients.des_phone_kinship_person2 == 0"}value=""{else}value="{$clients.des_phone_kinship_person2}"{/if}>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_cellphone_kinship_person2">Celular</label>
+                                <input type="text" class="form-control" id="des_cellphone_kinship_person2" name="des_cellphone_kinship_person2" 
+                                       placeholder="Insira o nº do celular da pessoa autorizada" data-mask="(99)99999-9999" maxlength="11" autocomplete="off" 
+                                       {if="$clients.des_cellphone_kinship_person2 == 0"}value=""{else}value="{$clients.des_cellphone_kinship_person2}"{/if}>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">FORMA DE PAGAMENTO</h3>
+                            </div>
+                            <div class="form-group">
+                                <label>Forma de Pagamento:</label><br>
+                                {loop="$payments"}
+                                    {if="$value == 'CARTAO DE CREDITO'"}
+                                        <label>Cartão de Crédito
+                                            <input type="checkbox" name="des_payment[]" value="CARTAO DE CREDITO" checked> &emsp; &emsp;
+                                        </label>
+                                    {else}
+                                        {if="$value != 'CARTAO DE CREDITO' && $key == 1"}
+                                            <label>Cartão de Crédito
+                                                <input type="checkbox" name="des_payment[]" value="CARTAO DE CREDITO"> &emsp; &emsp;
+                                            </label>
+                                        {/if}
+                                    {/if}
+                                    {if="$value == 'BOLETO'"}
+                                        <label>Boleto
+                                            <input type="checkbox" name="des_payment[]" value="BOLETO" checked> &emsp; &emsp;
+                                        </label>
+                                    {else}
+                                        {if="$value != 'BOLETO' && $key == 2"}
+                                            <label>Boleto
+                                                <input type="checkbox" name="des_payment[]" value="BOLETO"> &emsp; &emsp;
+                                            </label>
+                                        {/if}
+                                    {/if}
+                                    {if="$value == 'CARNE'"}
+                                        <label>Carnê
+                                            <input type="checkbox" name="des_payment[]" value="CARNE" checked> &emsp; &emsp;
+                                        </label>
+                                    {else}
+                                        {if="$value != 'CARNE' && $key == 3"}
+                                            <label>Carnê
+                                                <input type="checkbox" name="des_payment[]" value="CARNE"> &emsp; &emsp;
+                                            </label>
+                                        {/if}
+                                    {/if}
+                                    {if="$value == 'ANUAL'"}
+                                        <label>Anual
+                                            <input type="checkbox" name="des_payment[]" value="ANUAL" checked> &emsp; &emsp;
+                                        </label>
+                                    {else}
+                                        {if="$value != 'ANUAL' && $key == 4"}
+                                            <label>Anual
+                                                <input type="checkbox" name="des_payment[]" value="ANUAL"> &emsp; &emsp;
+                                            </label>
+                                        {/if}
+                                    {/if}
+                                {/loop}
+<!--                                {loop="$payments"}
+                                    {if="$value == 'CARTAO DE CREDITO'"}
+                                        <label>Cartão de Crédito
+                                            <input type="checkbox" name="des_payment[]" value="CARTAO" checked> &emsp; &emsp;
+                                        </label>
+                                    {else}
+                                        {if="$value == 'BOLETO'"}
+                                            <label>Boleto
+                                                <input type="checkbox" name="des_payment[]" value="BOLETO" checked> &emsp; &emsp;
+                                            </label>
+                                        {else}
+                                            {if="$value == 'CARNE'"}
+                                                <label>Carnê
+                                                    <input type="checkbox" name="des_payment[]" value="CARNE" checked> &emsp; &emsp;
+                                                </label>
+                                            {else}
+                                                {if="$value == 'ANUAL'"}
+                                                    <label>Anual
+                                                        <input type="checkbox" name="des_payment[]" value="ANUAL" checked>
+                                                    </label>
+                                                {/if}
+                                            {/if}
+                                        {/if}
+                                    {/if}                                    
+                                {/loop}
+                                {loop="$payments"}
+                                    {if="count($payments) == $counter + 1"}
+                                        {if="$value != 'CARTAO DE CREDITO'"}
+                                            <label>Cartão de Crédito
+                                            <input type="checkbox" name="des_payment[]" value="CARTAO"> &emsp; &emsp;
+                                        </label>
+                                        {/if}
+                                        {if="$value != 'BOLETO'"}
+                                            <label>Boleto
+                                                <input type="checkbox" name="des_payment[]" value="BOLETO"> &emsp; &emsp;
+                                            </label>
+                                        {/if}
+                                        {if="$value != 'CARNE'"}
+                                            <label>Carnê
+                                                <input type="checkbox" name="des_payment[]" value="CARNE"> &emsp; &emsp;
+                                            </label>
+                                        {/if}
+                                        {if="$value != 'ANUAL'"}
+                                            <label>Anual
+                                                <input type="checkbox" name="des_payment[]" value="ANUAL">
+                                            </label>
+                                        {/if}
+                                    {/if}
+                                {/loop}-->
+                                
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">ANEXO DE DOCUMENTOS</h3>
+                            </div>
+                            <div class="form-group">
+                                Selecione o arquivo (compactado, se mais de um):
+                                <input type="file" name="des_archive_client" value="{$clients.des_archive_client}">
+                            </div>
+                            <div class="form-group">
+                                <label for="des_obs_client">OBS:</label>
+                                <textarea rows="4" cols="50" class="form-control" id="des_obs_client" name="des_obs_client" 
+                                          placeholder="Observações, se necessário!" style="text-transform:uppercase">{$clients.des_obs_client}</textarea>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer col-md-12">
+                            <button type="submit" class="btn btn-success">Atualizar</button>
+<!--                            <button type="submit" class="btn btn-danger">Cancelar</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
