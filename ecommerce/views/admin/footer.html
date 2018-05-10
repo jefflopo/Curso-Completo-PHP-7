@@ -88,6 +88,18 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
+<script type="text/javascript">
+    $(function () {
+
+        //autocomplete
+        //./vendor/biggestao/php-classes/src/DB/
+        $(".auto").autocomplete({
+            source: "Search_.php",
+            minLength: 1
+        });
+
+    });
+</script>
 
 <!-- jQuery 2.2.3 -->
 <script src="/CursoCompletoPHP7/ecommerce/res/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
