@@ -1,0 +1,159 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Cadastro de Veículos
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/bgt/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="/bgt/admin/vehicle">Veículos</a></li>
+            <li class="active"><a href="/bgt/admin/vehicle/create">Cadastrar</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">INFORMAÇÕES VEÍCULO</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form autocomplete="off" method="get"><!-- action="/bgt/admin/vehicle/create-search" method='get' -->
+                        <div class="box-body">
+                            <div class="input-group input-group-sm autocomplete" style="width: 600px;">
+                                <input autocomplete="off" id="clients-input" name="clients-input" type="text" class="form-control pull-right auto" 
+                                       placeholder="Selecione um Cliente" style="text-transform:uppercase">
+                                <div class="input-group-btn">
+                                    <button id="search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form role="form" action="/bgt/admin/vehicle/create" method="post">
+
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">DADOS DO VEÍCULO</h3>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="des_board">Placa</label>
+                                <input type="text" class="form-control" id="des_board" name="des_board" placeholder="Ex: XXX-0000" 
+                                       data-mask="AAA-9999" maxlength="7" autocomplete="off" style="text-transform:uppercase" required>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="des_model">Modelo</label>
+                                <input type="text" class="form-control" id="des_model" name="des_model" 
+                                       placeholder="Digite Modelo do Veículo" required style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <!--
+                                <label for="desfabricante">Fabricante</label>
+                                <input type="text" class="form-control" id="desfabricante" name="desfabricante" placeholder="Fabricante do Veículo" required>
+                                -->
+                                <div class="form-group col-md-12">
+                                    &emsp; 
+                                    <label for="des_manufacturer">Fabricante</label>
+                                    <select id="des_manufacturer" name="des_manufacturer">
+                                        <option value="FIAT">FIAT</option>
+                                        <option value="FORD">FORD</option>
+                                        <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+                                        <option value="CHEVROLET - GM">CHEVROLET - GM</option>
+                                        <option value="NISSAN">NISSAN</option>
+                                        <option value="TOYOTA">TOYOTA</option>
+                                        <option value="HYUNDAI">HYUNDAI</option>
+                                        <option value="JAC MOTORS">JAC MOTORS</option>
+                                        <option value="HONDA">HONDA</option>
+                                        <option value="YAMAHA">YAMAHA</option>
+                                        <option value="BMW">BMW</option>
+                                        <option value="AUDI">AUDI</option>
+                                        <option value="RENAULT">RENAULT</option>
+                                        <option value="CHERY">CHERY</option>
+                                        <option value="CITROEN">CITROEN</option>
+                                        <option value="DODGE">DODGE</option>
+                                        <option value="EFFA">EFFA</option>
+                                        <option value="IVECO">IVECO</option>
+                                        <option value="JEEP">JEEP</option>
+                                        <option value="LAND ROVER">LAND ROVER</option>
+                                        <option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
+                                        <option value="MITSUBISHI">MITSUBISHI</option>
+                                        <option value="PEUGEOT">PEUGEOT</option>
+                                        <option value="SUZUKI">SUZUKI</option>
+                                        <option value="VOLVO">VOLVO</option>
+                                    </select>
+                                    &emsp; &emsp;
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="des_manufacturing_year_model">Ano / Modelo de Fabricação</label>
+                                <input type="text" class="form-control" id="des_manufacturing_year_model" name="des_manufacturing_year_model" placeholder="Ano / Modelo de Fabricação" required>
+                            </div> 
+                            <div class="form-group col-md-6">
+                                <label for="des_color">Cor</label>
+                                <input type="text" class="form-control" id="des_color" name="des_color" 
+                                       placeholder="Cor do Veículo" style="text-transform:uppercase">
+                            </div>  
+                            <!--                            <div class="form-group col-md-4">
+                                                            &emsp; 
+                                                            <label for="descor">Cor</label>
+                                                            <select>
+                                                                <option value="corAmarela">Amarela</option>
+                                                                <option value="corAzul">Azul</option>
+                                                                <option value="corBranca">Branca</option>
+                                                                <option value="corCinza">Cinza Chumbo</option>
+                                                                <option value="corFantasiado">Fantasiado</option>
+                                                                <option value="corFerrugem">Ferrugem</option>
+                                                                <option value="corNaoEspecificado">NÃO ESPECIFICADO</option>
+                                                                <option value="corPrata">Prata</option>
+                                                                <option value="corPreta">Preta</option>
+                                                                <option value="corRosa">Rosa</option>
+                                                                <option value="corRoxo">Roxo</option>
+                                                                <option value="corVerde">Verde</option>
+                                                                <option value="corVermelha">Vermelha</option>
+                                                            </select>
+                                                            &emsp; &emsp;
+                                                        </div>-->
+
+
+                            <div class="form-group col-md-6">
+                                <label for="des_renavam">Renavam</label>
+                                <input type="number" class="form-control" id="des_renavam" name="des_renavam" placeholder="Insira o Nº RENAVAM" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_chassi">Chassi</label>
+                                <input type="text" class="form-control" id="des_chassi" name="des_chassi" 
+                                       placeholder="Insira o Nº CHASSI" required style="text-transform:uppercase">
+                            </div>
+
+                        </div>
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">DADOS DE INSTALAÇÃO</h3>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="dtinstallation">Data de Instalação</label>
+                                <input type="date" class="form-control" id="dtinstallation" name="dtinstallation">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_obs_vehicle">OBS:</label>
+                                <textarea rows="4" cols="50" class="form-control" id="des_obs_vehicle" 
+                                          name="des_obs_vehicle" placeholder="Observações, se necessário!" style="text-transform:uppercase"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-success">Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
