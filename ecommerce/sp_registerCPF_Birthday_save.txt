@@ -1,0 +1,90 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registerCPF_Birthday_save`(
+	pdes_situation varchar(45),
+    pdes_plataform_name varchar(255),
+    pnrcpf_cnpj BIGINT(11),
+    pdes_main_activity varchar(512),
+    pdes_company_situation varchar(45),
+    pdes_fantasy_name varchar(255),
+    pdesname varchar(255),
+    pdes_rg_ie bigint(20),
+    pdessex varchar(10),
+    pdes_marital_status varchar(45),
+    pnr_cnh int(11),
+    pdt_of_birth date,
+    pdes_email varchar(255),
+    pnr_telephone bigint(20),
+    pnr_cell_phone bigint(20),
+    pdes_cep int(8),
+    pdes_address varchar(255),
+    pdes_number int(11),
+    pdes_neighborhood varchar(255),
+    pdes_city varchar(255),
+    pdes_complement varchar(255),
+    pdes_state varchar(2),
+    pdes_country varchar(255),
+    pdes_cod_ibge_uf varchar(5),
+    pdes_cod_ibge_municipio varchar(20),
+    pdes_latitude varchar(45),
+    pdes_longitude varchar(45),
+    pdes_name_person1 varchar(255),
+    pdes_kinship_person1 varchar(45),
+    pdes_phone_kinship_person1 bigint(20),
+    pdes_cellphone_kinship_person1 bigint(20),
+    pdes_name_person2 varchar(255),
+    pdes_kinship_person2 varchar(45),
+    pdes_phone_kinship_person2 bigint(20),
+    pdes_cellphone_kinship_person2 bigint(20),
+    pdes_payment varchar(100),
+    pdes_grouped varchar(255),
+    pdes_plan varchar(255),
+    pdes_archive_client int(11),
+    pdes_obs_client varchar(512)
+	
+	/*pdes_cadastral_situation varchar(255), pdes_voucher_issued varchar(255), pdes_dt_voucher_issued varchar(255)*/
+)
+BEGIN
+
+	DECLARE vidperson INT;
+	START TRANSACTION;
+    
+    IF NOT EXISTS ( SELECT idperson FROM tb_persons WHERE nrcpf_cnpj = pnrcpf_cnpj ) THEN
+       /* desname LIKE pdesname  AND */
+       /* SELECT 'PESSOA NAO CADASTRADA!!!';*/
+       INSERT INTO tb_persons VALUES (
+			NULL, pdesname, pdes_fantasy_name, pdes_main_activity, pdes_company_situation, pnrcpf_cnpj, NULL, NULL, 
+            NULL, pdes_rg_ie, 
+            pdessex, pdes_marital_status, pnr_cnh, pdt_of_birth, pdes_email, pnr_telephone, pnr_cell_phone, CURRENT_TIME, pdes_cep, pdes_address, 
+            pdes_number, pdes_neighborhood, pdes_city, pdes_complement, pdes_state, pdes_country, pdes_cod_ibge_uf, pdes_cod_ibge_municipio, 
+            pdes_latitude, pdes_longitude
+		);
+		
+		/*Depois de pnrcpf_cnpj deve substituir os proximos tres NULL por pdes_cadastral_situation, pdes_voucher_issued, pdes_dt_voucher_issued*/
+        
+    ELSE
+    
+		SELECT 'PESSOA JÁ CADASTRADA!';
+        ROLLBACK;
+        
+	END IF;
+    
+    SET vidperson = (
+		SELECT idperson FROM tb_persons WHERE nrcpf_cnpj = pnrcpf_cnpj
+	);
+			
+	INSERT INTO tb_clients VALUES (
+			NULL, vidperson, pdes_situation, pdes_plataform_name, CURRENT_TIME, pdes_name_person1,
+			pdes_kinship_person1, pdes_phone_kinship_person1, pdes_cellphone_kinship_person1,
+			pdes_name_person2, pdes_kinship_person2, pdes_phone_kinship_person2, 
+			pdes_cellphone_kinship_person2, pdes_payment, pdes_grouped, pdes_plan, pdes_archive_client, pdes_obs_client
+	);
+    
+    COMMIT;
+    
+    /*GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE, 
+		 @nroerro = MYSQL_ERRNO, @msgerro = MESSAGE_TEXT;
+		SET @msg_erro_completa = CONCAT("ERRO: ", @nroerro, " (", @sqlstate, "): ", @msgerro);
+		SELECT @msg_erro_completa;*/
+		
+	SELECT * FROM tb_clients c INNER JOIN tb_persons p USING(idperson) WHERE c.idperson = vidperson;
+
+END

@@ -1,0 +1,488 @@
+<!-- Content Wrapper. Contains page content -->
+<div id="clients-create" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Cadastro de Clientes
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/bgt/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="/bgt/admin/clients">Clientes</a></li>
+            <li class="active"><a href="/bgt/admin/clients/create">Cadastrar</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">INFORMAÇÕES CLIENTE</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form id="clients_create" role="form" action="/bgt/admin/clients/registerCPF" 
+                          method="post" enctype="multipart/form-data" name="clients_create">
+                        
+                        <div class="box-body">
+                            <div class="form-group col-md-6">
+                                <label for="des_situation">Situação</label>
+                                <select id="des_situation" name="des_situation" >
+                                    <option value="ATIVO" >Ativo</option>
+                                    <option value="SUSPENSO" >Suspenso</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="id_type_register">Tipo de Registro</label> 
+                                <select disabled name="id_type_register" id="id_type_register" onchange="alteraDiv()">
+                                    <option value="1" selected>Cadastro de Pessoa Física (CPF)</option>
+                                </select>
+                            </div>
+                            <div id="cpfdata" class="cpf_cnpj form-group col-md-12" >
+                                <div class="form-group col-md-4"><!--   form-group input-group input-group-sm col-md-6 -->
+                                    <label for="nrcpf_cnpj">CPF <b style="color: red;">*</b></label>
+                                    <input disabled type="text" class="form-control" name="nrcpf_cnpj" 
+                                           placeholder="Ex: 000.000.000-00"
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.nrcpf_cnpj}"{else}value=""{/if}
+                                           style="text-transform:uppercase" data-mask="000.000.000-00" maxlength="11">
+                                    <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="nrcpf_cnpj" 
+                                           placeholder="Ex: 000.000.000-00"
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.nrcpf_cnpj}"{else}value=""{/if}
+                                           data-mask="000.000.000-00" maxlength="11">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="dt_of_birth_create">Data de Nascimento <b style="color: red;">*</b></label>
+                                    <div class="input-group col-md-6">
+                                        <input disabled type="text" class="form-control" id="dt_of_birth" 
+                                               {if="$queriesWebService != NULL"}value="{$queriesWebService.dt_of_birth_create}"{else}value=""{/if}
+                                               name="dt_of_birth_create" style="text-transform:uppercase">
+                                        <input style="display: none; text-transform:uppercase" type="text" class="form-control" id="dt_of_birth" 
+                                               {if="$queriesWebService != NULL"}value="{$queriesWebService.dt_of_birth_create}"{else}value=""{/if}
+                                               name="dt_of_birth_create" >
+<!--                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default" formaction="/bgt/admin/clients/registerCPF" formmethod="get"><i class="fa fa-search"></i></button>  id="search-cpf" 
+                                        </div>-->
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4"><!--   form-group input-group input-group-sm col-md-6 -->
+                                    <label for="des_cadastral_situation">Situação Cadastral do CPF</label>
+                                    <input disabled type="text" class="form-control" name="des_cadastral_situation" 
+                                           placeholder="Ex: 000.000.000-00"
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.des_cadastral_situation}"{else}value=""{/if}
+                                           style="text-transform:uppercase" >
+                                    <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="des_cadastral_situation" 
+                                           placeholder="Ex: 000.000.000-00"
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.des_cadastral_situation}"{else}value=""{/if}>
+                                    <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="des_voucher_issued" 
+                                           placeholder="Certificado Emitido"
+                                        {if="$queriesWebService != NULL"}value="{$queriesWebService.des_voucher_issued}"{else}value=""{/if}>
+                                    <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="des_dt_voucher_issued" 
+                                           placeholder="Data de Emissao de Certificado"
+                                        {if="$queriesWebService != NULL"}value="{$queriesWebService.des_dt_voucher_issued}"{else}value=""{/if}>
+                                </div>
+                            </div>
+                            <!-- cnpjdata" style="display:none;" -->
+                            <!-- <div class="form-group col-md-4">   form-group input-group input-group-sm col-md-6 
+                                
+                                
+                                
+                                
+                                
+                                <label for="nrcpf_cnpj">CPF / CNPJ <b style="color: red;">*</b></label>
+                                <div class="input-group input-group-sm col-md-6">
+                                    <input type="text" class="form-control" name="nrcpf_cnpj" 
+                                       placeholder="Ex: 000.000.000-00 ou 000.000.000/0000-00"
+                            
+                                       autocomplete="off" style="text-transform:uppercase"> <!-- data-mask="000.000.000-00" maxlength="11" autocomplete="off" 
+                                     required 
+                                    <div class="input-group-btn">
+                                       <button id="search-cnpj" type="submit" class="btn btn-default" formaction="/bgt/admin/clients/registerCPF_CNPJ" formmethod="get"><i class="fa fa-search"></i></button> 
+                                    </div>
+                                </div> 
+                            </div>-->
+                            
+                            <div id="cnpjdata" class="cnpjdata form-group col-md-4" style="display:none;">
+                                <label for="nrcnpj">CNPJ <b style="color: red;">*</b></label>
+                                <div class="input-group col-md-6"><!--   form-group input-group input-group-sm col-md-6 -->
+                                    <input type="text" class="form-control" name="nrcnpj" 
+                                           placeholder="Ex: 00.000.000/0000-00"
+                                           style="text-transform:uppercase" ><!-- data-mask="00.000.000/0000-00" maxlength="0"  -->
+                                    <div class="input-group-btn">
+                                        <button id="search-cnpj" type="submit" class="btn btn-default" formaction="/bgt/admin/clients/registerCNPJ" formmethod="get"><i class="fa fa-search"></i></button> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="cnpjdata" class="cnpjdata form-group col-md-2" style="display:none;">
+                                <div class="form-group col-md-12"><!--   form-group input-group input-group-sm col-md-6 -->
+                                    <label for="des_main_activity">Atividade Principal <b style="color: red;">*</b></label>
+                                    <!--<input type="text" class="form-control" name="des_main_activity" 
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.des_main_activity}"{else}value=""{/if}
+                                           placeholder="Atividade Principal da Empresa"
+                                           style="text-transform:uppercase">-->
+                                    <textarea rows="4" cols="80" class="form-control" name="des_main_activity" 
+                                           placeholder="Atividade Principal da Empresa"
+                                           style="text-transform:uppercase"></textarea>
+                                </div>
+                            </div>
+                            <div id="cnpjdata" class="cpf_cnpj cnpjdata form-group col-md-2" style="display:none;">
+                                <div class="form-group col-md-12"><!--   form-group input-group input-group-sm col-md-6 -->
+                                    <label for="des_company_situation">Situação da Empresa <b style="color: red;">*</b></label>
+                                    <input type="text" class="form-control" name="des_company_situation"
+                                           placeholder="Situação Atual da Empresa"
+                                           style="text-transform:uppercase"><!--   -->
+                                </div>
+                            </div>
+                            <div id="cnpjdata" class="cpf_cnpj cnpjdata form-group col-md-2" style="display:none;">
+                                <div class="form-group col-md-12">
+                                    <label for="des_fantasy_name">Nome Fantasia</label>
+                                    <input type="text" class="form-control" id="des_fantasy_name" 
+                                           name="des_fantasy_name" placeholder="Digite o nome fantasia"
+                                           autocomplete="off" style="text-transform:uppercase">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="box-body">
+                                <div class="box">
+                                    <h3 class="box-title">DADOS A CADASTRAR</h3>
+                                </div>
+                            
+                                <div class="form-group col-md-6">
+                                    <label for="desname">Nome / Razão Social <b style="color: red;">*</b></label>
+                                    <input style="display: none; text-transform:uppercase" class="form-control" id="desname" 
+                                           name="desname" placeholder="Digite o nome do Cliente *"
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.desname}"{else}value=""{/if}
+                                           autocomplete="off" >
+                                    <input disabled type="text" class="form-control" id="desname" 
+                                           name="desname" placeholder="Digite o nome do Cliente *"
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.desname}"{else}value=""{/if}
+                                           autocomplete="off" style="text-transform:uppercase"><!-- required -->
+                                    
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="des_plataform_name">Nome da Plataforma de Rastreamento <b style="color: red;">*</b></label>
+                                    <input type="text" class="form-control" id="des_plataform_name" autocomplete="off"
+                                           name="des_plataform_name" placeholder="Ex: Plataforma A ou Plataforma B *"
+                                           style="text-transform:uppercase" > <!-- required -->
+                                </div>
+
+
+                                <div class="form-group col-md-6">
+                                    <label for="des_rg_ie">RG/IE</label>
+                                    <input type="text" class="form-control" id="des_rg_ie" 
+                                           name="des_rg_ie" placeholder="Digite o RG"
+                                           autocomplete="off" style="text-transform:uppercase">
+                                </div>                            
+                                <div class="form-group col-md-6">
+                                    <label for="dessex">Sexo</label>
+                                    <input type="text" class="form-control" id="dessex" 
+                                           name="dessex" placeholder="Masculino, Feminino ou Outro"
+                                           autocomplete="off" style="text-transform:uppercase">
+                                </div>                            
+                                <div class="form-group col-md-6">
+                                    <label for="des_marital_status">Estado Civil</label>
+                                    <input type="text" class="form-control" id="des_marital_status" 
+                                           name="des_marital_status" placeholder="Solteiro(a), Casado(a), Divorciado(a) ou Viúvo(a)"
+                                           autocomplete="off" style="text-transform:uppercase">
+                                </div>                            
+                                <div class="form-group col-md-6">
+                                    <label for="nr_cnh">Nº da CNH</label>
+                                    <input type="number" class="form-control" id="nr_cnh" 
+                                           name="nr_cnh" placeholder="Nº da CNH do Cliente"
+                                           autocomplete="off" style="text-transform:uppercase">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="dt_of_birth_create">Data de Nascimento</label>
+                                    <input disabled type="text" class="form-control" id="dt_of_birth_create" 
+                                           name="dt_of_birth_create" 
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.dt_of_birth_create}"{else}value=""{/if} 
+                                           style="text-transform:uppercase">
+                                    <input style="display: none; text-transform:uppercase" type="text" class="form-control" id="dt_of_birth_create" 
+                                           name="dt_of_birth_create" 
+                                           {if="$queriesWebService != NULL"}value="{$queriesWebService.dt_of_birth_create}"{else}value=""{/if}>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="des_email">E-mail <b style="color: red;">*</b></label>
+                                    <input type="email" class="form-control" id="des_email" name="des_email" autocomplete="off"
+                                           placeholder="Digite o e-mail" style="text-transform:lowercase;"><!-- required -->
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="nr_telephone">Telefone Fixo</label>
+                                    <input type="text" class="form-control" id="nr_telephone" 
+                                           name="nr_telephone" placeholder="Ex: (00)0000-0000" maxlength="11" data-mask="(99)9999-9999"
+                                           autocomplete="off" style="text-transform:uppercase">
+                                    
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="nr_cell_phone">Celular <b style="color: red;">*</b></label>
+                                    <input type="text" class="form-control" id="nr_cell_phone" 
+                                           name="nr_cell_phone" placeholder="Ex: (00)00000-0000" data-mask="(99)99999-9999" maxlength="11"
+                                           autocomplete="off" style="text-transform:uppercase"><!-- required -->
+                                </div>
+                            </div>
+                        
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">ENDEREÇO</h3>
+                            </div>
+                            
+                            <div><label for="des_cep">CEP <b style="color: red;">*</b></label></div>
+                            <div class="input-group input-group-sm col-md-6"> <!-- form-group col-md-6 -->
+                                                                
+                                <input id="des_cep" name="des_cep" type="text" class="form-control"
+                                       placeholder="Ex: 00000-000" data-mask="99.999-999" maxlength="8" 
+                                       autocomplete="off" 
+                                       {if="$queryCEP != NULL"}value="{$queryCEP.des_cep}"{else}value=""{/if}>
+                                
+<!--                                <input id="des_cep" name="des_cep" type="text" class="form-control"
+                                       placeholder="Ex: 00000-000" data-mask="99.999-999" maxlength="8" 
+                                       autocomplete="off" >
+                                 required 
+                                <div class="input-group-btn">
+                                    <button id="search-cep" type="submit" class="btn btn-default" formaction="/bgt/admin/clients/registerCEP" formmethod="get"><i class="fa fa-search"></i></button>
+                                </div>-->
+                                
+                            </div>
+                            <br/>
+                            <div class="form-group col-md-6">
+                                <label for="des_address">Endereço</label>
+                                <input type="text" class="form-control" id="des_address" 
+                                       name="des_address" autocomplete="off" placeholder="Digite o endereço" 
+                                       {if="$queryCEP != NULL"}value="{$queryCEP.des_address}"{else}value=""{/if}
+                                       style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_number">Nº</label>
+                                <input type="text" class="form-control" id="des_number" autocomplete="off"
+                                       name="des_number" 
+                                       placeholder="Digite o Nº" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_neighborhood">Bairro</label>
+                                <input type="text" class="form-control" id="des_neighborhood"
+                                       name="des_neighborhood" autocomplete="off" 
+                                       {if="$queryCEP != NULL"}value="{$queryCEP.des_neighborhood}"{else}value=""{/if}
+                                       placeholder="Digite o Bairro" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_city">Cidade</label>
+                                <input type="text" class="form-control" id="des_city" 
+                                       name="des_city" autocomplete="off" 
+                                       {if="$queryCEP != NULL"}value="{$queryCEP.des_city}"{else}value=""{/if}
+                                       placeholder="Digite a Cidade" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_complement">Complemento</label>
+                                <input type="text" class="form-control" id="des_complement" 
+                                       name="des_complement" autocomplete="off" 
+                                       placeholder="Digite o Complemento" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_state">Estado</label>
+                                <input type="text" class="form-control" id="des_state" 
+                                       name="des_state" autocomplete="off" placeholder="Estado" 
+                                       {if="$queryCEP != NULL"}value="{$queryCEP.des_state}"{else}value=""{/if}
+                                       style="text-transform:uppercase" maxlength="2">
+                            </div>
+                            
+                            <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="des_cod_ibge_municipio" 
+                                       placeholder="Dados do Webservice CEP"
+                                {if="$queryCEP != NULL"}value="{$queryCEP.des_cod_ibge_municipio}"{else}value=""{/if} >
+                            <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="des_cod_ibge_uf" 
+                                   placeholder="Dados do Webservice CEP"
+                                {if="$queryCEP != NULL"}value="{$queryCEP.des_cod_ibge_uf}"{else}value=""{/if} >
+                            <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="des_latitude" 
+                                   placeholder="Dados do Webservice CEP"
+                                {if="$queryCEP != NULL"}value="{$queryCEP.des_latitude}"{else}value=""{/if} >
+                            <input style="display: none; text-transform:uppercase" type="text" class="form-control" name="des_longitude" 
+                                   placeholder="Dados do Webservice CEP"
+                                {if="$queryCEP != NULL"}value="{$queryCEP.des_longitude}"{else}value=""{/if} >
+                            
+                            
+                        </div>
+                        
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">PESSOAS AUTORIZADAS</h3>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_name_person1">Pessoa 1</label>
+                                <input type="text" class="form-control" id="des_name_person1" 
+                                       name="des_name_person1" autocomplete="off"
+                                       placeholder="Insira o nome da pessoa autorizada" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_kinship_person1">Parentesco</label>
+                                <input type="text" class="form-control" id="des_kinship_person1" 
+                                       name="des_kinship_person1" autocomplete="off"
+                                       placeholder="Irmão(ã), Esposo(a), Pai, Mãe, Sobrinho(a), Neto(a), Primo(a)" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_phone_kinship_person1">Telefone</label>
+                                <input type="text" class="form-control" id="des_phone_kinship_person1" name="des_phone_kinship_person1" 
+                                       autocomplete="off" placeholder="Insira o telefone da pessoa autorizada" data-mask="(99)9999-9999" maxlength="10" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_cellphone_kinship_person1">Celular</label>
+                                <input type="text" class="form-control" id="des_cellphone_kinship_person1" 
+                                       name="des_cellphone_kinship_person1" autocomplete="off"
+                                       placeholder="Insira o nº do celular da pessoa autorizada" data-mask="(99)99999-9999" maxlength="11" autocomplete="off">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <br/>
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <label for="des_name_person2">Pessoa 2</label>
+                                <input type="text" class="form-control" id="des_name_person2" 
+                                       name="des_name_person2" autocomplete="off"
+                                       placeholder="Insira o nome da pessoa autorizada" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_kinship_person2">Parentesco</label>
+                                <input type="text" class="form-control" id="des_kinship_person2" 
+                                       name="des_kinship_person2" autocomplete="off"
+                                       placeholder="Irmão(ã), Esposo(a), Pai, Mãe, Sobrinho(a), Neto(a), Primo(a)" style="text-transform:uppercase">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_phone_kinship_person2">Telefone</label>
+                                <input type="text" class="form-control" id="des_phone_kinship_person2" 
+                                       name="des_phone_kinship_person2" autocomplete="off"
+                                       placeholder="Insira o telefone da pessoa autorizada" data-mask="(99)9999-9999" maxlength="10" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="des_cellphone_kinship_person2">Celular</label>
+                                <input type="text" class="form-control" id="des_cellphone_kinship_person2" 
+                                       name="des_cellphone_kinship_person2" autocomplete="off"
+                                       placeholder="Insira o nº do celular da pessoa autorizada" data-mask="(99)99999-9999" maxlength="11" >
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">FORMA DE PAGAMENTO</h3>
+                            </div>
+                            <div class="form-group wish_payment_type">
+                                <label >Forma de Pagamento: <b style="color: red;">*</b></label><br>
+                                <div id="checkboxes">
+                                    <label for="des_payment[]" >Cartão de Crédito
+                                        <input type="checkbox" name="des_payment[]" value="CARTAO DE CREDITO" >  &emsp; &emsp;
+                                    </label>
+                                    <label for="des_payment[]" >Boleto
+                                        <input type="checkbox" name="des_payment[]" value="BOLETO" > &emsp; &emsp;
+                                    </label>
+                                    <label for="des_payment[]" >Carnê
+                                        <input type="checkbox" name="des_payment[]" value="CARNE" > &emsp; &emsp;
+                                    </label>
+                                    <label for="des_payment[]" >Anual
+                                        <input type="checkbox" name="des_payment[]" value="ANUAL" >
+                                    </label>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">AGRUPAMENTO E PLANO</h3>
+                            </div>
+                            <div class="form-group grouped_type col-md-6">
+                                <label>Escolha o Agrupamento Adequado: <b style="color: red;">*</b></label><br>
+                                <div id="radio_grouped">
+                                    
+                                    <input type="text" class="form-control" id="des_grouped" 
+                                           name="des_grouped" placeholder="RASTREAMENTO BSB, BRASCAR OU PARCEIRO TERESINA"
+                                           autocomplete="off" style="text-transform:uppercase" ><!-- required -->
+                                </div>
+                            </div>
+                            <div class="form-group grouped_type col-md-6">
+                                <label>Escolha o Plano Adequado: <b style="color: red;">*</b></label><br>
+                                <div id="radio_plans">
+                                    <input type="text" class="form-control auto" id="des_plan" 
+                                           name="des_plan" placeholder="ESCOLHA O PLANO MAIS ADEQUADO"
+                                           autocomplete="off" style="text-transform:uppercase" ><!-- required -->
+                                    <input type="hidden" id="idPlano" name="idPlano">
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="box">
+                                <h3 class="box-title">ANEXO DE DOCUMENTOS</h3>
+                            </div>
+                            <!--<form method="POST" action="#" enctype="multipart/form-data">-->
+                                <!-- COMPONENT START -->
+                                <div class="form-group">
+                                    <div class="input-group" name="Fichier1"><!-- input-file -->
+                                        <input id="des_archive1_client" name="des_archive1_client" type="file" 
+                                           accept="application/pdf, image/png, image/jpeg, image/jpg" class="form-control" placeholder='Escolha arquivo 1...' />			
+<!--                                        <span class="input-group-btn">
+                                            <button type="reset" value="" class="btn btn-danger">Desistir do Envio de Arquivo 1</button>
+                                        </span>-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" name="Fichier1">
+                                        <input id="des_archive2_client" name="des_archive2_client" type="file" 
+                                           accept="application/pdf, image/png, image/jpeg, image/jpg" class="form-control" placeholder='Escolha arquivo 2...' />			
+<!--                                        <span class="input-group-btn">
+                                            <button type="reset" class="btn btn-danger">Desistir do Envio de Arquivo 2</button>
+                                        </span>-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" name="Fichier1">
+                                        <input id="des_archive3_client" name="des_archive3_client" type="file" 
+                                           accept="application/pdf, image/png, image/jpeg, image/jpg" class="form-control" placeholder='Escolha arquivo 3...' />			
+<!--                                        <span class="input-group-btn">
+                                            <button type="reset" class="btn btn-danger">Desistir do Envio de Arquivo 3</button>
+                                        </span>-->
+                                    </div>
+                                </div>
+                                <!-- COMPONENT END -->
+<!--                                <div class="form-group">
+                                    <button type="reset" class="btn btn-danger">Desistir do Envio de Arquivo</button>
+                                </div>-->
+                            <!--</form>-->
+<!--                            <div class="form-group">
+                                Selecione o arquivo (compactado, se mais de um):
+                                <input type="file" 
+                                    name="des_archive_client" id="des_archive_client">
+                            </div>-->
+                            <div class="form-group">
+                                <label for="des_obs_client">OBS:</label>
+                                <textarea rows="4" cols="50" class="form-control" id="des_obs_client" name="des_obs_client" 
+                                          placeholder="Observações, se necessário!" style="text-transform:uppercase"></textarea>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer col-md-12">
+                            <button id="submit" type="submit" class="btn btn-success" onclick="return confirm('Deseja realmente Cadastrar este cliente?')">Cadastrar</button>
+<!--                            <button type="submit" class="btn btn-danger">Cancelar</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!--<script type="text/javascript" src="/res/admin/dist/js/jquery-1.9.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+       $("#registerCPF_CNPJ").modal();
+    });
+</script>-->
+
+<!--
+if ( session_status() !== PHP_SESSION_ACTIVE )
+{
+    session_start();
+    <script type="text/javascript" src="/res/admin/dist/js/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           $("#registerCPF_CNPJ").modal();
+        });
+    </script>
+} -->
